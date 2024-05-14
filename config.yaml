@@ -1,0 +1,54 @@
+# ----------- Training configuration
+training:
+  epochs: 200  # Number of training epochs
+  batch_size: 30  # Batch size for training
+  learning_rate: 0.00001  # Learning rate for the optimizer
+  num_mics_training: 30 # Number of microphones to use for training
+  num_mics_validation: 1 # Number of microphones to use for validation
+  device: "cuda"  # Device to use for training ("cpu", "cuda", etc.)
+  dtype: "float32"  # Data type to use for training ("float16","float32", "float64", etc.)
+  seed: 0
+
+# ----------- Model configuration
+model:
+  architecture: "SIRENNet"  # Model architecture type ("SIRENNet", "None", etc.)
+  kernel: "RBF" # Kernel type ("RBF","Bessel",None), todo: add bessel and matern kernels
+  kernel_jitter: 1e-6 # Jitter for the kernel matrix
+  sound_speed: 343 # Speed of sound in air (m/s)
+  SIRENNet:
+    hidden_size: 100
+    num_hidden_layers: 5
+  pde_settings: # Set to zero to run without PDE regularization
+    N_collocation_time: 1
+    N_collocation_space: 0
+
+# ----------- Data configuration
+data:
+  dataset_name: "simulated_data_3d"
+  SNR: 40  # Signal-to-noise ratio (dB)
+  source_signal: "white" # Source signal type ("white", "sine")
+  N_time: 50
+  # If "sine", frequency of the source signal (Hz)
+  frequency: 500  
+  # If white, frequency range of the source signal (Hz)
+  cutoff_low: 50
+  cutoff_high: 1000
+
+  simulated_data:
+    room_dim: [6, 5, 3]  # Room dimensions (meters)
+    rt60: 0.2  # Reverberation time (seconds)
+    fs: 3000  # Sampling rate (Hz)
+    source_pos: [1, 2, 1.5]  # Source position (meters)
+    array_size: 31  # = num_mics_training + num_mics_validation
+
+    mic_array_3d:
+      mic_pos_cube_center: [4, 3, 1.5]  # Center of microphone array (meters)
+      mic_pos_cube_side: 0.5 # Length of the side of the cube of microphones (meters)
+
+  
+# ----------- Wandb configuration (optional)
+wandb:
+  use_wandb: True  # Whether to use wandb for logging
+  project: "kernel_learning_time"  # Wandb project name (optional)
+  entity: "davstrom99"  # Wandb username (optional)
+  group_name: "simulation_broadband"  # Wandb group name (optional)
