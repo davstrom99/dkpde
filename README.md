@@ -8,7 +8,7 @@ This repository provides code for a wave equation-informed spatio-temporal deep 
 # Getting started:
 This repository contains code used in the paper.
 
-To train the network, set the parameters in the config.yaml and then run PDEDKLTrainer.py. To train the model without wave equation regularization, set N_collocation_time and N_collocation_space to 0.
+To train a model, set the parameters in the config.yaml and then run PDEDKLTrainer.py. To train a model without wave equation regularization, set N_collocation_time and N_collocation_space to 0.
 
 To use a pre-trained network, see eval_frequency.py for an example.
 
