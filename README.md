@@ -13,3 +13,9 @@ To train a model, set the parameters in the config.yaml and then run PDEDKLTrain
 To use a pre-trained network, see eval_frequency.py for an example.
 
 # References
+@article{sundstrom2024sound,
+  title={Sound Field Estimation Using Deep Kernel Learning Regularized by the Wave Equation},
+  author={Sundstr{\"o}m, David and Koyama, Shoichi and Jakobsson, Andreas},
+  journal={arXiv preprint arXiv:2407.04417},
+  year={2024}
+}
